@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "15692:15692"
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq_definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq_enabled_plugins:/etc/rabbitmq/enabled_plugins

@@ -1,0 +1,104 @@
+{
+  "rabbit_version": "3.8.3",
+  "rabbitmq_version": "3.8.3",
+  "users": [
+    {
+      "name": "guest",
+      "password": "guest",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [],
+  "policies": [],
+  "queues": [
+    {
+      "name": "events.ordem.judicial.OJUD-BASE.bloqueio",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "events.ordem.judicial.OJUD-BASE.retorno.bloqueio",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "events.ordem.judicial.OJUD-BASE.dead.bloqueio",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "events.ordem.judicial.bloqueio",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "events.ordem.judicial.retorno.bloqueio",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "events.ordem.judicial.dead.bloqueio",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "events.ordem.judicial.bloqueio",
+      "vhost": "/",
+      "destination": "events.ordem.judicial.OJUD-BASE.bloqueio",
+      "destination_type": "queue",
+      "arguments": {}
+    },
+    {
+      "source": "events.ordem.judicial.retorno.bloqueio",
+      "vhost": "/",
+      "destination": "events.ordem.judicial.OJUD-BASE.retorno.bloqueio",
+      "destination_type": "queue",
+      "arguments": {}
+    },
+    {
+      "source": "events.ordem.judicial.dead.bloqueio",
+      "vhost": "/",
+      "destination": "events.ordem.judicial.OJUD-BASE.dead.bloqueio",
+      "destination_type": "queue",
+      "routing_key": "dead_rkey",
+      "arguments": {}
+    }
+  ]
+}
